@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// Image assets - using placeholder images for deployment
-const img = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80";
-const imgProfilePhoto = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80";
-const img3 = "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&q=80";
-const img4 = "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=600&q=80";
-const imgTestimonialThumb = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80";
+// Image assets - place your images in public/images folder
+// Using placeholders for missing images - replace with your own later
+const img = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80"; // Replace with /images/pacebeats.png
+const imgProfilePhoto = "/images/profile.jpg";
+const img3 = "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&q=80"; // Replace with /images/campuscare.png
+const img4 = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"; // Replace with /images/cafehunt.png
+const imgTestimonialThumb = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80"; // Replace with /images/testimonial.png
 
 // Mobile Menu Icon
 const MenuIcon = () => (
