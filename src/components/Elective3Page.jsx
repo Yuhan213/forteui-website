@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+// Mobile Menu Icon
+const MenuIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 12H21M3 6H21M3 18H21" stroke="#153935" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 6L6 18M6 6L18 18" stroke="#153935" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
 // SVG Components
 const ChevronDown = ({ color = "#8e8e93" }) => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,13 +46,13 @@ const LinkedInIcon = () => (
   </svg>
 );
 
-// Assignment card images - gradient placeholders (replace with actual images)
+// Assignment card images - using placeholder images for deployment
 const assignmentImages = [
-  'http://localhost:3845/assets/99659e581f4c747c2db0fa01eff33a8e4a6d7e7a.png',
-  'http://localhost:3845/assets/59ffdff48b82bc40cc83d58985a7e6081791d4ae.png',
-  'http://localhost:3845/assets/af4ba1fac41586b8704d7d05635dccb878aeda74.png',
-  'http://localhost:3845/assets/ebb912c0b443bad7dbc00b068dfbd09d6b3111c8.png',
-  'http://localhost:3845/assets/99659e581f4c747c2db0fa01eff33a8e4a6d7e7a.png',
+  'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
+  'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&q=80',
+  'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=400&q=80',
+  'https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=400&q=80',
+  'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
 ];
 
 // Sample PDF assignments - replace with your actual PDFs
@@ -78,8 +91,13 @@ const assignments = [
 
 export default function Elective3Page() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Detect touch device
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    
     let frameId;
     const handleMouseMove = (e) => {
       if (frameId) cancelAnimationFrame(frameId);
@@ -96,92 +114,134 @@ export default function Elective3Page() {
 
   return (
     <>
-      {/* Custom Cursor */}
-      <div
-        className="fixed w-4 h-4 rounded-full pointer-events-none z-[100] will-change-transform"
-        style={{
-          left: cursorPos.x,
-          top: cursorPos.y,
-          transform: 'translate(-50%, -50%) translateZ(0)',
-          background: 'radial-gradient(circle, #153935 0%, rgba(21,57,53,0.6) 50%, transparent 70%)',
-        }}
-      />
+      {/* Custom Cursor - only on non-touch devices */}
+      {!isTouchDevice && (
+        <div
+          className="fixed w-4 h-4 rounded-full pointer-events-none z-[100] will-change-transform hidden md:block"
+          style={{
+            left: cursorPos.x,
+            top: cursorPos.y,
+            transform: 'translate(-50%, -50%) translateZ(0)',
+            background: 'radial-gradient(circle, #153935 0%, rgba(21,57,53,0.6) 50%, transparent 70%)',
+          }}
+        />
+      )}
 
       <div className="bg-white relative w-full">
         {/* Header - Same as HomePage */}
-        <header className="fixed h-[100px] left-0 right-0 top-0 bg-white/90 backdrop-blur-md z-50" style={{ boxShadow: '0px 0px 1px 0px rgba(20,20,20,0.12), 0px 1px 8px 0px rgba(20,20,20,0.08)' }}>
-          {/* Upper Header */}
-          <div className="h-[52px] flex items-center justify-center relative">
-            <div className="absolute left-[60px] size-[20px] cursor-pointer hover:opacity-70 transition-opacity">
-              <SearchIcon />
-            </div>
-            <Link to="/" className="font-['Montserrat'] font-semibold text-[24px] text-[#153935] tracking-[-0.7px] hover:opacity-80 transition-opacity">
+        <header className="fixed h-[60px] md:h-[100px] left-0 right-0 top-0 bg-white/90 backdrop-blur-md z-50" style={{ boxShadow: '0px 0px 1px 0px rgba(20,20,20,0.12), 0px 1px 8px 0px rgba(20,20,20,0.08)' }}>
+          {/* Mobile Header */}
+          <div className="md:hidden h-[60px] flex items-center justify-between px-4">
+            <Link to="/" className="font-['Montserrat'] font-semibold text-[20px] text-[#153935] tracking-[-0.7px]">
               ForteUI
             </Link>
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+              {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
           </div>
-          {/* Lower Header / Navigation */}
-          <div className="h-[48px] flex items-center justify-center">
-            <div className="flex gap-[20px] items-center">
-              <Link to="/" className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">HOME</span>
+          
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden absolute top-[60px] left-0 right-0 bg-white shadow-lg py-4 px-6 flex flex-col gap-4">
+              <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex gap-[4px] items-center cursor-pointer">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">HOME</span>
               </Link>
-              <div className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">UI/UX PROJECTS</span>
+              <div className="flex items-center gap-1 cursor-pointer">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">UI/UX PROJECTS</span>
                 <ChevronDown />
               </div>
               <div className="flex gap-[4px] items-center cursor-pointer">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black">ELECTIVE 3</span>
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-black">ELECTIVE 3</span>
                 <ChevronDown color="#000" />
               </div>
-              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 5</span>
+              <div className="flex gap-[4px] items-center cursor-pointer">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ELECTIVE 5</span>
                 <ChevronDown />
               </div>
-              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ABOUT</span>
+              <div className="flex gap-[4px] items-center cursor-pointer">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ABOUT</span>
               </div>
-              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">CONTACT</span>
+              <div className="flex gap-[4px] items-center cursor-pointer">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">CONTACT</span>
+              </div>
+            </div>
+          )}
+          
+          {/* Desktop Header */}
+          <div className="hidden md:block">
+            {/* Upper Header */}
+            <div className="h-[52px] flex items-center justify-center relative">
+              <div className="absolute left-[60px] size-[20px] cursor-pointer hover:opacity-70 transition-opacity">
+                <SearchIcon />
+              </div>
+              <Link to="/" className="font-['Montserrat'] font-semibold text-[24px] text-[#153935] tracking-[-0.7px] hover:opacity-80 transition-opacity">
+                ForteUI
+              </Link>
+            </div>
+            {/* Lower Header / Navigation */}
+            <div className="h-[48px] flex items-center justify-center">
+              <div className="flex gap-[20px] items-center">
+                <Link to="/" className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">HOME</span>
+                </Link>
+                <div className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity">
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">UI/UX PROJECTS</span>
+                  <ChevronDown />
+                </div>
+                <div className="flex gap-[4px] items-center cursor-pointer">
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black">ELECTIVE 3</span>
+                  <ChevronDown color="#000" />
+                </div>
+                <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 5</span>
+                  <ChevronDown />
+                </div>
+                <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ABOUT</span>
+                </div>
+                <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">CONTACT</span>
+                </div>
               </div>
             </div>
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="pt-[100px] relative overflow-hidden">
+        <main className="pt-[60px] md:pt-[100px] relative overflow-hidden">
           {/* Decorative Gradient Ellipses - contained within main */}
           <div 
-            className="absolute w-[800px] h-[800px] pointer-events-none z-0 opacity-60"
+            className="absolute w-[400px] md:w-[800px] h-[400px] md:h-[800px] pointer-events-none z-0 opacity-60"
             style={{
-              left: '-300px',
-              top: '400px',
+              left: '-150px',
+              top: '200px',
               background: 'radial-gradient(circle, rgba(226,234,233,0.9) 0%, rgba(226,234,233,0.3) 40%, transparent 70%)',
               borderRadius: '50%',
             }}
           />
           <div 
-            className="absolute w-[800px] h-[800px] pointer-events-none z-0 opacity-60"
+            className="absolute w-[400px] md:w-[800px] h-[400px] md:h-[800px] pointer-events-none z-0 opacity-60"
             style={{
-              right: '-300px',
-              top: '-200px',
+              right: '-150px',
+              top: '-100px',
               background: 'radial-gradient(circle, rgba(226,234,233,0.9) 0%, rgba(226,234,233,0.3) 40%, transparent 70%)',
               borderRadius: '50%',
             }}
           />
           {/* Product Collection / Assignments Grid */}
-          <section className="py-[80px] px-[80px] flex flex-col items-center gap-[48px]">
-            {/* First Row - 4 Assignments */}
-            <div className="flex gap-[16px] items-center">
+          <section className="py-8 md:py-[80px] px-4 sm:px-8 md:px-[80px] flex flex-col items-center gap-6 md:gap-[48px]">
+            {/* Responsive Grid - 2 columns on mobile, 4 on desktop */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[16px] w-full max-w-[1300px]">
               {assignments.slice(0, 4).map((assignment) => (
                 <a
                   key={assignment.id}
                   href={assignment.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-[340px] w-[308px] relative cursor-pointer group"
+                  className="relative cursor-pointer group"
                 >
                   {/* Thumbnail */}
-                  <div className="absolute left-0 top-0 w-[308px] h-[308px] rounded-[16px] overflow-hidden">
+                  <div className="w-full aspect-square rounded-[12px] md:rounded-[16px] overflow-hidden">
                     <img 
                       src={assignment.image} 
                       alt={assignment.title}
@@ -189,7 +249,7 @@ export default function Elective3Page() {
                     />
                   </div>
                   {/* Title */}
-                  <p className="absolute left-0 right-0 top-[324px] font-['Plus_Jakarta_Sans'] font-bold text-[16px] text-black text-center">
+                  <p className="mt-2 md:mt-4 font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] text-black text-center">
                     {assignment.title}
                   </p>
                 </a>
@@ -197,17 +257,17 @@ export default function Elective3Page() {
             </div>
 
             {/* Second Row - 1 Assignment Centered */}
-            <div className="flex gap-[16px] items-center justify-center">
+            <div className="flex gap-4 md:gap-[16px] items-center justify-center">
               {assignments.slice(4, 5).map((assignment) => (
                 <a
                   key={assignment.id}
                   href={assignment.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-[340px] w-[308px] relative cursor-pointer group"
+                  className="relative cursor-pointer group w-[calc(50%-8px)] md:w-[308px]"
                 >
                   {/* Thumbnail */}
-                  <div className="absolute left-0 top-0 w-[308px] h-[308px] rounded-[16px] overflow-hidden">
+                  <div className="w-full aspect-square rounded-[12px] md:rounded-[16px] overflow-hidden">
                     <img 
                       src={assignment.image} 
                       alt={assignment.title}
@@ -215,7 +275,7 @@ export default function Elective3Page() {
                     />
                   </div>
                   {/* Title */}
-                  <p className="absolute left-0 right-0 top-[324px] font-['Plus_Jakarta_Sans'] font-bold text-[16px] text-black text-center">
+                  <p className="mt-2 md:mt-4 font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] text-black text-center">
                     {assignment.title}
                   </p>
                 </a>
@@ -225,21 +285,21 @@ export default function Elective3Page() {
         </main>
 
         {/* Footer - Same as HomePage */}
-        <footer className="bg-[#153935] py-[50px] px-[60px]">
+        <footer className="bg-[#153935] py-8 md:py-[50px] px-4 sm:px-8 md:px-[60px]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-['Montserrat'] font-semibold text-[32px] text-white tracking-[-1px] mb-[16px]">
+          <h2 className="font-['Montserrat'] font-semibold text-[24px] md:text-[32px] text-white tracking-[-1px] mb-3 md:mb-[16px]">
             ForteUI
           </h2>
-          <p className="font-['Inter'] text-[14px] leading-[1.6] text-[#f2f2f7] max-w-[380px] mb-[40px]">
+          <p className="font-['Inter'] text-[12px] md:text-[14px] leading-[1.6] text-[#f2f2f7] max-w-[380px] mb-6 md:mb-[40px]">
             Supercharge your design workflow, kick-start your project faster and level up your process.
           </p>
-          <div className="flex justify-between items-center">
-            <div className="flex gap-[8px]">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex gap-2 md:gap-[8px]">
               <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><TwitterIcon /></a>
               <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><DribbbleIcon /></a>
               <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><LinkedInIcon /></a>
             </div>
-            <div className="flex gap-[16px] font-['Plus_Jakarta_Sans'] text-[11px] text-[#f2f2f7]">
+            <div className="flex flex-wrap gap-3 md:gap-[16px] font-['Plus_Jakarta_Sans'] text-[10px] md:text-[11px] text-[#f2f2f7]">
               <span>ForteUI© 2023</span>
               <a href="#" className="hover:underline">Terms</a>
               <a href="#" className="hover:underline">Privacy & Policy</a>
@@ -251,7 +311,9 @@ export default function Elective3Page() {
       </div>
 
       <style>{`
-        * { cursor: none !important; }
+        @media (hover: hover) and (pointer: fine) {
+          * { cursor: none !important; }
+        }
       `}</style>
     </>
   );

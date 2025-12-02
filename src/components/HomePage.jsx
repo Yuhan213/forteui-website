@@ -1,12 +1,25 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// Image assets from Figma
-const img = "http://localhost:3845/assets/99659e581f4c747c2db0fa01eff33a8e4a6d7e7a.png";
-const imgProfilePhoto = "http://localhost:3845/assets/2d5c564d685c4b33ba78389af9a845e6f68ca484.png";
-const img3 = "http://localhost:3845/assets/ebb912c0b443bad7dbc00b068dfbd09d6b3111c8.png";
-const img4 = "http://localhost:3845/assets/af4ba1fac41586b8704d7d05635dccb878aeda74.png";
-const imgTestimonialThumb = "http://localhost:3845/assets/f220db6490a8442877ea06649acc75949277cbb1.png";
+// Image assets - using placeholder images for deployment
+const img = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80";
+const imgProfilePhoto = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80";
+const img3 = "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&q=80";
+const img4 = "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=600&q=80";
+const imgTestimonialThumb = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80";
+
+// Mobile Menu Icon
+const MenuIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 12H21M3 6H21M3 18H21" stroke="#153935" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 6L6 18M6 6L18 18" stroke="#153935" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
 
 // SVG Components
 const ChevronDown = () => (
@@ -42,8 +55,13 @@ const LinkedInIcon = () => (
 
 export default function HomePage() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Detect touch device
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    
     let frameId;
     const handleMouseMove = (e) => {
       if (frameId) cancelAnimationFrame(frameId);
@@ -60,16 +78,18 @@ export default function HomePage() {
 
   return (
     <div className="bg-white relative w-full overflow-x-hidden">
-      {/* Custom Cursor */}
-      <div
-        className="fixed w-4 h-4 rounded-full pointer-events-none z-[100] will-change-transform"
-        style={{
-          left: cursorPos.x,
-          top: cursorPos.y,
-          transform: 'translate(-50%, -50%) translateZ(0)',
-          background: 'radial-gradient(circle, #153935 0%, rgba(21,57,53,0.6) 50%, transparent 70%)',
-        }}
-      />
+      {/* Custom Cursor - only on non-touch devices */}
+      {!isTouchDevice && (
+        <div
+          className="fixed w-4 h-4 rounded-full pointer-events-none z-[100] will-change-transform hidden md:block"
+          style={{
+            left: cursorPos.x,
+            top: cursorPos.y,
+            transform: 'translate(-50%, -50%) translateZ(0)',
+            background: 'radial-gradient(circle, #153935 0%, rgba(21,57,53,0.6) 50%, transparent 70%)',
+          }}
+        />
+      )}
 
       {/* Decorative Gradient Ellipses - only visible on hero/featured sections */}
       <div 
@@ -92,112 +112,154 @@ export default function HomePage() {
       />
 
       {/* Header */}
-      <header className="fixed h-[100px] left-0 right-0 top-0 bg-white/90 backdrop-blur-md z-50" style={{ boxShadow: '0px 0px 1px 0px rgba(20,20,20,0.12), 0px 1px 8px 0px rgba(20,20,20,0.08)' }}>
-        {/* Upper Header */}
-        <div className="h-[52px] flex items-center justify-center relative">
-          <div className="absolute left-[60px] size-[20px] cursor-pointer hover:opacity-70 transition-opacity">
-            <SearchIcon />
-          </div>
-          <div className="font-['Montserrat'] font-semibold text-[24px] text-[#153935] tracking-[-0.7px]">
+      <header className="fixed h-[60px] md:h-[100px] left-0 right-0 top-0 bg-white/90 backdrop-blur-md z-50" style={{ boxShadow: '0px 0px 1px 0px rgba(20,20,20,0.12), 0px 1px 8px 0px rgba(20,20,20,0.08)' }}>
+        {/* Mobile Header */}
+        <div className="md:hidden h-[60px] flex items-center justify-between px-4">
+          <div className="font-['Montserrat'] font-semibold text-[20px] text-[#153935] tracking-[-0.7px]">
             ForteUI
           </div>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
         </div>
-        {/* Lower Header / Navigation */}
-        <div className="h-[48px] flex items-center justify-center">
-          <div className="flex gap-[20px] items-center">
+        
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-[60px] left-0 right-0 bg-white shadow-lg py-4 px-6 flex flex-col gap-4">
             <div className="flex gap-[4px] items-center cursor-pointer">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black">HOME</span>
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-black">HOME</span>
             </div>
-            <div className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">UI/UX PROJECTS</span>
+            <div className="flex items-center gap-1 cursor-pointer">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">UI/UX PROJECTS</span>
               <ChevronDown />
             </div>
-            <Link to="/elective-3" className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 3</span>
+            <Link to="/elective-3" onClick={() => setMobileMenuOpen(false)} className="flex gap-[4px] items-center cursor-pointer">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ELECTIVE 3</span>
               <ChevronDown />
             </Link>
-            <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 5</span>
+            <div className="flex gap-[4px] items-center cursor-pointer">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ELECTIVE 5</span>
               <ChevronDown />
             </div>
-            <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ABOUT</span>
+            <div className="flex gap-[4px] items-center cursor-pointer">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ABOUT</span>
             </div>
-            <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">CONTACT</span>
+            <div className="flex gap-[4px] items-center cursor-pointer">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">CONTACT</span>
+            </div>
+          </div>
+        )}
+        
+        {/* Desktop Header */}
+        <div className="hidden md:block">
+          {/* Upper Header */}
+          <div className="h-[52px] flex items-center justify-center relative">
+            <div className="absolute left-[60px] size-[20px] cursor-pointer hover:opacity-70 transition-opacity">
+              <SearchIcon />
+            </div>
+            <div className="font-['Montserrat'] font-semibold text-[24px] text-[#153935] tracking-[-0.7px]">
+              ForteUI
+            </div>
+          </div>
+          {/* Lower Header / Navigation */}
+          <div className="h-[48px] flex items-center justify-center">
+            <div className="flex gap-[20px] items-center">
+              <div className="flex gap-[4px] items-center cursor-pointer">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black">HOME</span>
+              </div>
+              <div className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">UI/UX PROJECTS</span>
+                <ChevronDown />
+              </div>
+              <Link to="/elective-3" className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 3</span>
+                <ChevronDown />
+              </Link>
+              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 5</span>
+                <ChevronDown />
+              </div>
+              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ABOUT</span>
+              </div>
+              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">CONTACT</span>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="pt-[100px]">
+      <main className="pt-[60px] md:pt-[100px]">
         {/* Hero Section */}
-        <section className="min-h-[calc(100vh-100px)] flex items-center justify-center px-[60px] py-[40px]">
-          <div className="w-full max-w-[1100px] flex items-center justify-between gap-[40px]">
+        <section className="min-h-[calc(100vh-60px)] md:min-h-[calc(100vh-100px)] flex items-center justify-center px-4 sm:px-8 md:px-[60px] py-8 md:py-[40px]">
+          <div className="w-full max-w-[1100px] flex flex-col md:flex-row items-center justify-between gap-8 md:gap-[40px]">
+            {/* Hero Image - Shows first on mobile */}
+            <div className="relative flex-shrink-0 animate-fadeIn order-1 md:order-2" style={{ animationDelay: '0.2s' }}>
+              <div className="w-[200px] h-[260px] sm:w-[280px] sm:h-[360px] md:w-[340px] md:h-[440px] relative">
+                {/* Outer stroke */}
+                <div className="absolute inset-0 border border-[#153935] rounded-[500px]" />
+                {/* Inner image container */}
+                <div className="absolute border border-[#153935] rounded-[500px] overflow-hidden"
+                  style={{ left: '16px', top: '20px', right: '16px', bottom: '20px' }}
+                >
+                  <img 
+                    alt="Profile" 
+                    className="w-full h-full object-cover" 
+                    src={imgProfilePhoto} 
+                  />
+                </div>
+              </div>
+            </div>
             {/* Left Content */}
-            <div className="flex flex-col gap-[28px] max-w-[420px] animate-fadeIn">
-              <h1 className="font-['Plus_Jakarta_Sans'] font-semibold text-[42px] text-[#153935] tracking-[0.4px] leading-[1.15]">
+            <div className="flex flex-col gap-4 sm:gap-6 md:gap-[28px] max-w-[420px] animate-fadeIn text-center md:text-left order-2 md:order-1">
+              <h1 className="font-['Plus_Jakarta_Sans'] font-semibold text-[28px] sm:text-[36px] md:text-[42px] text-[#153935] tracking-[0.4px] leading-[1.15]">
                 I collaborate to build digital experience
               </h1>
-              <p className="font-['Plus_Jakarta_Sans'] font-medium text-[14px] text-black leading-[24px]">
+              <p className="font-['Plus_Jakarta_Sans'] font-medium text-[13px] sm:text-[14px] text-black leading-[22px] sm:leading-[24px]">
                 UI/UX Designer and Developer creating intuitive digital experiences. I blend user research, creative design, and technical expertise to build solutions that users love.
               </p>
-              <button className="self-start bg-[#153935] text-white font-['Plus_Jakarta_Sans'] font-medium text-[16px] px-[40px] py-[16px] rounded-[40px] hover:bg-[#1a4a44] hover:scale-105 transition-all duration-300">
+              <button className="self-center md:self-start bg-[#153935] text-white font-['Plus_Jakarta_Sans'] font-medium text-[14px] sm:text-[16px] px-8 sm:px-[40px] py-3 sm:py-[16px] rounded-[40px] hover:bg-[#1a4a44] hover:scale-105 transition-all duration-300">
                 Contact Me
               </button>
-            </div>
-            {/* Hero Image */}
-            <div className="relative flex-shrink-0 animate-fadeIn" style={{ animationDelay: '0.2s', width: '340px', height: '440px' }}>
-              {/* Outer stroke */}
-              <div className="absolute inset-0 border border-[#153935] rounded-[500px]" />
-              {/* Inner image container */}
-              <div className="absolute border border-[#153935] rounded-[500px] overflow-hidden"
-                style={{ left: '28px', top: '36px', width: '284px', height: '368px' }}
-              >
-                <img 
-                  alt="Profile" 
-                  className="w-full h-full object-cover" 
-                  src={imgProfilePhoto} 
-                />
-              </div>
             </div>
           </div>
         </section>
 
         {/* Featured Work Section */}
-        <section className="py-[80px] px-[60px]">
-          <div className="max-w-[960px] mx-auto flex flex-col gap-[40px] items-center">
-            <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[28px] text-[#191a15] text-center">
+        <section className="py-12 md:py-[80px] px-4 sm:px-8 md:px-[60px]">
+          <div className="max-w-[960px] mx-auto flex flex-col gap-6 md:gap-[40px] items-center">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[24px] md:text-[28px] text-[#191a15] text-center">
               Featured Work
             </h2>
-            <div className="w-full flex gap-[16px]" style={{ height: '380px' }}>
+            <div className="w-full flex flex-col md:flex-row gap-4 md:gap-[16px]">
               {/* Large Card - Pacebeats */}
-              <div className="relative flex-[1.7] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300">
+              <div className="relative h-[250px] sm:h-[300px] md:h-[380px] md:flex-[1.7] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300">
                 <img alt="Pacebeats" className="w-full h-full object-cover" src={img} />
-                <div className="absolute bottom-[24px] left-[24px] text-white">
-                  <p className="font-['Plus_Jakarta_Sans'] font-bold text-[20px] leading-[1.2] mb-2">#1 Pacebeats</p>
-                  <p className="font-['Plus_Jakarta_Sans'] font-normal text-[12px] leading-[1.5] max-w-[300px]">
+                <div className="absolute bottom-4 md:bottom-[24px] left-4 md:left-[24px] text-white">
+                  <p className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] md:text-[20px] leading-[1.2] mb-2">#1 Pacebeats</p>
+                  <p className="font-['Plus_Jakarta_Sans'] font-normal text-[11px] md:text-[12px] leading-[1.5] max-w-[280px] md:max-w-[300px]">
                     Enhance your chosen item with an exceptional formula that offers unbeatable performance.
                   </p>
                 </div>
               </div>
               {/* Right Column */}
-              <div className="flex-1 flex flex-col gap-[16px]">
+              <div className="flex-1 flex flex-col sm:flex-row md:flex-col gap-4 md:gap-[16px]">
                 {/* Small Card - CampusCare */}
-                <div className="relative flex-1 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+                <div className="relative h-[180px] sm:h-[200px] md:flex-1 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
                   <img alt="CampusCare" className="w-full h-full object-cover" src={img3} />
-                  <div className="absolute bottom-[20px] left-[20px] text-white">
-                    <p className="font-['Plus_Jakarta_Sans'] font-bold text-[16px] leading-[1.2] mb-1">#2 CampusCare</p>
-                    <p className="font-['Plus_Jakarta_Sans'] font-normal text-[11px] leading-[1.5]">We've got what you need.</p>
+                  <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
+                    <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#2 CampusCare</p>
+                    <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">We've got what you need.</p>
                   </div>
                 </div>
                 {/* Small Card - CafeHunt */}
-                <div className="relative flex-1 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+                <div className="relative h-[180px] sm:h-[200px] md:flex-1 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
                   <img alt="CafeHunt" className="w-full h-full object-cover" src={img4} />
-                  <div className="absolute bottom-[20px] left-[20px] text-white">
-                    <p className="font-['Plus_Jakarta_Sans'] font-bold text-[16px] leading-[1.2] mb-1">#3 CafeHunt</p>
-                    <p className="font-['Plus_Jakarta_Sans'] font-normal text-[11px] leading-[1.5]">For your all time favorite</p>
+                  <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
+                    <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#3 CafeHunt</p>
+                    <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">For your all time favorite</p>
                   </div>
                 </div>
               </div>
@@ -206,40 +268,40 @@ export default function HomePage() {
         </section>
 
         {/* Testimonial Section */}
-        <section className="py-[80px] px-[60px]">
-          <div className="max-w-[960px] mx-auto flex flex-col gap-[40px] items-center">
-            <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[28px] text-black text-center">
+        <section className="py-12 md:py-[80px] px-4 sm:px-8 md:px-[60px]">
+          <div className="max-w-[960px] mx-auto flex flex-col gap-6 md:gap-[40px] items-center">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[24px] md:text-[28px] text-black text-center">
               Testimonial
             </h2>
-            <div className="w-full flex gap-[40px]">
+            <div className="w-full flex flex-col md:flex-row gap-6 md:gap-[40px]">
               {/* Testimonial 1 */}
-              <div className="flex-1 flex gap-[14px] items-start">
-                <img alt="Ken" className="w-[36px] h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} />
-                <div className="flex flex-col gap-[14px] font-['Plus_Jakarta_Sans'] text-black">
-                  <p className="text-[13px] leading-[1.7]">
-                    Tim's ability to bridge the gap between technical development and user experience was invaluable to our PaceBeats project. He consistently delivered clean, functional code while ensuring our Android app remained intuitive for runners. His attention to detail in both the UI implementation and biometric integration made our collaboration smooth and productive
+              <div className="flex-1 flex gap-3 md:gap-[14px] items-start">
+                <img alt="Ken" className="w-[32px] h-[32px] md:w-[36px] md:h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} />
+                <div className="flex flex-col gap-2 md:gap-[14px] font-['Plus_Jakarta_Sans'] text-black">
+                  <p className="text-[12px] md:text-[13px] leading-[1.7]">
+                    Tim's ability to bridge the gap between technical development and user experience was invaluable to our PaceBeats project. He consistently delivered clean, functional code while ensuring our Android app remained intuitive for runners.
                   </p>
-                  <p className="text-[11px] font-medium">Ken Patrick Garcia</p>
+                  <p className="text-[10px] md:text-[11px] font-medium">Ken Patrick Garcia</p>
                 </div>
               </div>
               {/* Testimonial 2 */}
-              <div className="flex-1 flex gap-[14px] items-start">
-                <img alt="Mark" className="w-[36px] h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} />
-                <div className="flex flex-col gap-[14px] font-['Plus_Jakarta_Sans'] text-black">
-                  <p className="text-[13px] leading-[1.7]">
-                    Working with Tim on PaceBeats showed me what thorough UX research looks like. He transformed our survey data from 46 respondents into actionable user personas that guided our entire design process. His ability to translate technical requirements into user-friendly language helped our team stay aligned on what we were building and why.
+              <div className="flex-1 flex gap-3 md:gap-[14px] items-start">
+                <img alt="Mark" className="w-[32px] h-[32px] md:w-[36px] md:h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} />
+                <div className="flex flex-col gap-2 md:gap-[14px] font-['Plus_Jakarta_Sans'] text-black">
+                  <p className="text-[12px] md:text-[13px] leading-[1.7]">
+                    Working with Tim on PaceBeats showed me what thorough UX research looks like. He transformed our survey data from 46 respondents into actionable user personas that guided our entire design process.
                   </p>
-                  <p className="text-[11px] font-medium">Mark Angelo Siazon</p>
+                  <p className="text-[10px] md:text-[11px] font-medium">Mark Angelo Siazon</p>
                 </div>
               </div>
               {/* Testimonial 3 */}
-              <div className="flex-1 flex gap-[14px] items-start">
-                <img alt="Lanz" className="w-[36px] h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} />
-                <div className="flex flex-col gap-[14px] font-['Plus_Jakarta_Sans'] text-black">
-                  <p className="text-[13px] leading-[1.7]">
-                    Tim brought a level of professionalism and organization to our thesis project that kept us on track from research through defense. His design decisions were always backed by user data, and he had a talent for taking complex features like real-time biometric monitoring and making them feel simple and accessible. Great teammate and collaborator.
+              <div className="flex-1 flex gap-3 md:gap-[14px] items-start">
+                <img alt="Lanz" className="w-[32px] h-[32px] md:w-[36px] md:h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} />
+                <div className="flex flex-col gap-2 md:gap-[14px] font-['Plus_Jakarta_Sans'] text-black">
+                  <p className="text-[12px] md:text-[13px] leading-[1.7]">
+                    Tim brought a level of professionalism and organization to our thesis project that kept us on track from research through defense. His design decisions were always backed by user data.
                   </p>
-                  <p className="text-[11px] font-medium">Lanz Corpuz</p>
+                  <p className="text-[10px] md:text-[11px] font-medium">Lanz Corpuz</p>
                 </div>
               </div>
             </div>
@@ -247,21 +309,21 @@ export default function HomePage() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-[#153935] py-[50px] px-[60px] relative z-10">
+        <footer className="bg-[#153935] py-8 md:py-[50px] px-4 sm:px-8 md:px-[60px] relative z-10">
           <div className="max-w-[1100px] mx-auto">
-            <h2 className="font-['Montserrat'] font-semibold text-[32px] text-white tracking-[-1px] mb-[16px]">
+            <h2 className="font-['Montserrat'] font-semibold text-[24px] md:text-[32px] text-white tracking-[-1px] mb-3 md:mb-[16px]">
               ForteUI
             </h2>
-            <p className="font-['Inter'] text-[14px] leading-[1.6] text-[#f2f2f7] max-w-[380px] mb-[40px]">
+            <p className="font-['Inter'] text-[12px] md:text-[14px] leading-[1.6] text-[#f2f2f7] max-w-[380px] mb-6 md:mb-[40px]">
               Supercharge your design workflow, kick-start your project faster and level up your process.
             </p>
-            <div className="flex justify-between items-center">
-              <div className="flex gap-[8px]">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="flex gap-2 md:gap-[8px]">
                 <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><TwitterIcon /></a>
                 <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><DribbbleIcon /></a>
                 <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><LinkedInIcon /></a>
               </div>
-              <div className="flex gap-[16px] font-['Plus_Jakarta_Sans'] text-[11px] text-[#f2f2f7]">
+              <div className="flex flex-wrap gap-3 md:gap-[16px] font-['Plus_Jakarta_Sans'] text-[10px] md:text-[11px] text-[#f2f2f7]">
                 <span>ForteUI© 2023</span>
                 <a href="#" className="hover:underline">Terms</a>
                 <a href="#" className="hover:underline">Privacy & Policy</a>
@@ -282,7 +344,9 @@ export default function HomePage() {
           opacity: 0;
         }
         html { scroll-behavior: smooth; }
-        * { cursor: none !important; }
+        @media (hover: hover) and (pointer: fine) {
+          * { cursor: none !important; }
+        }
       `}</style>
     </div>
   );
