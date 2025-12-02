@@ -230,13 +230,13 @@ export default function HomePage() {
 
         {/* Featured Work Section */}
         <section className="py-12 md:py-[80px] px-4 sm:px-8 md:px-[60px]">
-          <div className="max-w-[960px] mx-auto flex flex-col gap-6 md:gap-[40px] items-center">
+          <div className="max-w-[1100px] mx-auto flex flex-col gap-6 md:gap-[40px] items-center">
             <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[24px] md:text-[28px] text-[#191a15] text-center">
               Featured Work
             </h2>
-            <div className="w-full flex flex-col md:flex-row gap-4 md:gap-[16px]">
+            <div className="w-full flex flex-col md:flex-row gap-4 md:gap-[16px] md:h-[420px]">
               {/* Large Card - Pacebeats */}
-              <div className="relative h-[250px] sm:h-[300px] md:h-[380px] md:flex-[1.7] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300">
+              <div className="relative h-[280px] sm:h-[320px] md:h-full md:w-[60%] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300">
                 <img alt="Pacebeats" className="w-full h-full object-cover" src={img} />
                 <div className="absolute bottom-4 md:bottom-[24px] left-4 md:left-[24px] text-white">
                   <p className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] md:text-[20px] leading-[1.2] mb-2">#1 Pacebeats</p>
@@ -245,10 +245,10 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
-              {/* Right Column */}
-              <div className="flex-1 flex flex-col sm:flex-row md:flex-col gap-4 md:gap-[16px]">
+              {/* Right Column - Two stacked cards */}
+              <div className="md:w-[40%] flex flex-col sm:flex-row md:flex-col gap-4 md:gap-[16px] md:h-full">
                 {/* Small Card - CampusCare */}
-                <div className="relative h-[180px] sm:h-[200px] md:flex-1 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+                <div className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
                   <img alt="CampusCare" className="w-full h-full object-cover" src={img3} />
                   <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
                     <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#2 CampusCare</p>
@@ -256,7 +256,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 {/* Small Card - CafeHunt */}
-                <div className="relative h-[180px] sm:h-[200px] md:flex-1 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+                <div className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
                   <img alt="CafeHunt" className="w-full h-full object-cover" src={img4} />
                   <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
                     <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#3 CafeHunt</p>
