@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&family=Montserrat:wght@600&family=Lato:wght@400;500;600&family=Inter:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-text-primary;
+    background-color: #153935;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  /* Button styles matching the design */
+  .btn-primary {
+    @apply bg-primary-dark text-white px-14 py-6 rounded-[40px] font-body font-medium text-[22px] leading-[18px];
+  }
+
+  /* Navigation tab styles */
+  .nav-tab {
+    @apply font-sans font-bold text-base leading-none;
+  }
+
+  .nav-tab.active {
+    @apply text-surface;
+  }
+
+  .nav-tab.inactive {
+    @apply text-secondary;
+  }
+}
