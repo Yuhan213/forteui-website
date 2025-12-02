@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 // Image assets - place your images in public/images folder
 // Using placeholders for missing images - replace with your own later
-const img = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80"; // Replace with /images/pacebeats.png
+const img = "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800&q=80"; // Purple gradient - Replace with /images/pacebeats.png
 const imgProfilePhoto = "/images/profile.jpg";
-const img3 = "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&q=80"; // Replace with /images/campuscare.png
-const img4 = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"; // Replace with /images/cafehunt.png
+const img3 = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80"; // Phone mockup - Replace with /images/campuscare.png
+const img4 = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"; // Circuit board - Replace with /images/cafehunt.png
 const imgTestimonialThumb = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80"; // Replace with /images/testimonial.png
 
 // Mobile Menu Icon
