@@ -237,7 +237,7 @@ export default function HomePage() {
             <div className="w-full flex flex-col md:flex-row gap-4 md:gap-[16px] md:h-[420px]">
               {/* Large Card - Pacebeats */}
               <div className="relative h-[280px] sm:h-[320px] md:h-full md:w-[60%] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300">
-                <img alt="Pacebeats" className="w-full h-full object-cover" src={img} />
+                <img alt="Pacebeats" className="w-full h-full object-cover object-center" src={img} />
                 <div className="absolute bottom-4 md:bottom-[24px] left-4 md:left-[24px] text-white">
                   <p className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] md:text-[20px] leading-[1.2] mb-2">#1 Pacebeats</p>
                   <p className="font-['Plus_Jakarta_Sans'] font-normal text-[11px] md:text-[12px] leading-[1.5] max-w-[280px] md:max-w-[300px]">
