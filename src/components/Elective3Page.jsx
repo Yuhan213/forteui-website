@@ -72,11 +72,11 @@ const assignments = [
   },
   {
     id: 3,
-    title: 'Assignment 3: Docker Lab',
-    subtitle: 'Container orchestration',
-    pdfUrl: 'https://docker-lab-elec3.vercel.app/',
+    title: 'Assignment 3',
+    subtitle: 'Technical documentation',
+    pdfUrl: '/pdfs/Assignment 3.pdf',
     image: '/images/assignments/assignment3.png',
-    type: 'website',
+    type: 'pdf',
   },
   {
     id: 4,
@@ -93,6 +93,14 @@ const assignments = [
     pdfUrl: '/pdfs/Assignment 5.pdf',
     image: '/images/assignments/assignment5.png',
     type: 'pdf',
+  },
+  {
+    id: 6,
+    title: 'Assignment 6: Docker Lab',
+    subtitle: 'Container orchestration',
+    pdfUrl: 'https://docker-lab-elec3.vercel.app/',
+    image: '/images/assignments/assignment6.png',
+    type: 'website',
   },
 ];
 
@@ -246,35 +254,37 @@ export default function Elective3Page() {
                 </div>
               ))}
             </div>
-            {/* Second Row - 1 centered assignment */}
+            {/* Second Row - 2 centered assignments */}
             <div className="flex justify-center w-full max-w-[1300px]">
-              {assignments.slice(4, 5).map((assignment) => (
-                <div
-                  key={assignment.id}
-                  onClick={() => setSelectedPdf(assignment)}
-                  className="relative cursor-pointer group w-1/2 md:w-1/4"
-                >
-                  <Card className="relative border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0 aspect-square">
-                    {/* Image */}
-                    <img 
-                      src={assignment.image} 
-                      alt={assignment.title}
-                      className="w-full h-full object-cover"
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    {/* Text Overlay */}
-                    <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 right-3 md:right-4 text-white z-10">
-                      <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">
-                        {assignment.title}
-                      </p>
-                      <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">
-                        {assignment.subtitle}
-                      </p>
-                    </div>
-                  </Card>
-                </div>
-              ))}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[16px] w-full md:w-1/2">
+                {assignments.slice(4, 6).map((assignment) => (
+                  <div
+                    key={assignment.id}
+                    onClick={() => setSelectedPdf(assignment)}
+                    className="relative cursor-pointer group"
+                  >
+                    <Card className="relative border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0 aspect-square">
+                      {/* Image */}
+                      <img 
+                        src={assignment.image} 
+                        alt={assignment.title}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      {/* Text Overlay */}
+                      <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 right-3 md:right-4 text-white z-10">
+                        <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">
+                          {assignment.title}
+                        </p>
+                        <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">
+                          {assignment.subtitle}
+                        </p>
+                      </div>
+                    </Card>
+                  </div>
+                ))}
+              </div>
             </div>
 
           </section>
