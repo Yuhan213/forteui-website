@@ -129,26 +129,26 @@ export default function HomePage() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-[60px] left-0 right-0 bg-white shadow-lg py-4 px-6 flex flex-col gap-4">
-            <div className="flex gap-[4px] items-center cursor-pointer">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-black">HOME</span>
+            <div className="flex gap-[4px] items-center cursor-pointer group">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-black group-hover:text-[#4ade80] transition-colors duration-300">HOME</span>
             </div>
-            <div className="flex items-center gap-1 cursor-pointer">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">UI/UX PROJECTS</span>
+            <div className="flex items-center gap-1 cursor-pointer group">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">UI/UX PROJECTS</span>
               <ChevronDown />
             </div>
-            <Link to="/elective-3" onClick={() => setMobileMenuOpen(false)} className="flex gap-[4px] items-center cursor-pointer">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ELECTIVE 3</span>
+            <Link to="/elective-3" onClick={() => setMobileMenuOpen(false)} className="flex gap-[4px] items-center cursor-pointer group">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 3</span>
               <ChevronDown />
             </Link>
-            <div className="flex gap-[4px] items-center cursor-pointer">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ELECTIVE 5</span>
+            <div className="flex gap-[4px] items-center cursor-pointer group">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 5</span>
               <ChevronDown />
             </div>
-            <div className="flex gap-[4px] items-center cursor-pointer">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">ABOUT</span>
+            <div className="flex gap-[4px] items-center cursor-pointer group">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ABOUT</span>
             </div>
-            <div className="flex gap-[4px] items-center cursor-pointer">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93]">CONTACT</span>
+            <div className="flex gap-[4px] items-center cursor-pointer group">
+              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">CONTACT</span>
             </div>
           </div>
         )}
@@ -167,26 +167,26 @@ export default function HomePage() {
           {/* Lower Header / Navigation */}
           <div className="h-[48px] flex items-center justify-center">
             <div className="flex gap-[20px] items-center">
-              <div className="flex gap-[4px] items-center cursor-pointer">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black">HOME</span>
+              <div className="flex gap-[4px] items-center cursor-pointer group">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">HOME</span>
               </div>
-              <div className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">UI/UX PROJECTS</span>
+              <div className="flex items-center gap-1 cursor-pointer group">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">UI/UX PROJECTS</span>
                 <ChevronDown />
               </div>
-              <Link to="/elective-3" className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 3</span>
+              <Link to="/elective-3" className="flex gap-[4px] items-center cursor-pointer group">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">ELECTIVE 3</span>
                 <ChevronDown />
               </Link>
-              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ELECTIVE 5</span>
+              <div className="flex gap-[4px] items-center cursor-pointer group">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">ELECTIVE 5</span>
                 <ChevronDown />
               </div>
-              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">ABOUT</span>
+              <div className="flex gap-[4px] items-center cursor-pointer group">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">ABOUT</span>
               </div>
-              <div className="flex gap-[4px] items-center cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93]">CONTACT</span>
+              <div className="flex gap-[4px] items-center cursor-pointer group">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">CONTACT</span>
               </div>
             </div>
           </div>
