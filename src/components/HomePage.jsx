@@ -138,15 +138,6 @@ export default function HomePage() {
             <Link to="/elective-3" onClick={() => setMobileMenuOpen(false)} className="flex gap-[4px] items-center cursor-pointer group">
               <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 3</span>
             </Link>
-            <div className="flex gap-[4px] items-center cursor-pointer group">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 5</span>
-            </div>
-            <div className="flex gap-[4px] items-center cursor-pointer group">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ABOUT</span>
-            </div>
-            <div className="flex gap-[4px] items-center cursor-pointer group">
-              <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">CONTACT</span>
-            </div>
           </div>
         )}
         
@@ -173,15 +164,6 @@ export default function HomePage() {
               <Link to="/elective-3" className="flex gap-[4px] items-center cursor-pointer group">
                 <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 3</span>
               </Link>
-              <div className="flex gap-[4px] items-center cursor-pointer group">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 5</span>
-              </div>
-              <div className="flex gap-[4px] items-center cursor-pointer group">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ABOUT</span>
-              </div>
-              <div className="flex gap-[4px] items-center cursor-pointer group">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">CONTACT</span>
-              </div>
             </div>
           </div>
         </div>

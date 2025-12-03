@@ -52,43 +52,46 @@ const LinkedInIcon = () => (
   </svg>
 );
 
-// Assignment card images - using placeholder images for deployment
-const assignmentImages = [
-  'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
-  'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&q=80',
-  'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=400&q=80',
-  'https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=400&q=80',
-  'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
-];
-
 // Assignments with PDFs and websites
 const assignments = [
   {
     id: 1,
-    title: 'Assignment 1',
+    title: 'Assignment 1: REST API',
+    subtitle: 'Building RESTful web services',
     pdfUrl: '/pdfs/Assignment 1.pdf',
-    image: assignmentImages[0],
+    image: '/images/assignments/assignment1.png',
     type: 'pdf',
   },
   {
     id: 2,
-    title: 'Assignment 2',
+    title: 'Assignment 2: AWS',
+    subtitle: 'Cloud computing fundamentals',
     pdfUrl: '/pdfs/Assignment 2.pdf',
-    image: assignmentImages[1],
+    image: '/images/assignments/assignment2.png',
     type: 'pdf',
   },
   {
     id: 3,
-    title: 'Assignment 3',
+    title: 'Assignment 3: Docker Lab',
+    subtitle: 'Container orchestration',
     pdfUrl: 'https://docker-lab-elec3.vercel.app/',
-    image: assignmentImages[2],
+    image: '/images/assignments/assignment3.png',
     type: 'website',
   },
   {
     id: 4,
-    title: 'Assignment 4',
+    title: 'Assignment 4: Narrative Report',
+    subtitle: 'Documentation and analysis',
     pdfUrl: '/pdfs/Assignment 4.pdf',
-    image: assignmentImages[3],
+    image: '/images/assignments/assignment4.png',
+    type: 'pdf',
+  },
+  {
+    id: 5,
+    title: 'Assignment 5',
+    subtitle: 'Final project presentation',
+    pdfUrl: '/pdfs/Assignment 5.pdf',
+    image: '/images/assignments/assignment5.png',
     type: 'pdf',
   },
 ];
@@ -159,15 +162,6 @@ export default function Elective3Page() {
               <div className="flex gap-[4px] items-center cursor-pointer group">
                 <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-black group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 3</span>
               </div>
-              <div className="flex gap-[4px] items-center cursor-pointer group">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 5</span>
-              </div>
-              <div className="flex gap-[4px] items-center cursor-pointer group">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ABOUT</span>
-              </div>
-              <div className="flex gap-[4px] items-center cursor-pointer group">
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">CONTACT</span>
-              </div>
             </div>
           )}
           
@@ -193,15 +187,6 @@ export default function Elective3Page() {
                 </div>
                 <div className="flex gap-[4px] items-center cursor-pointer group">
                   <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 3</span>
-                </div>
-                <div className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 5</span>
-                </div>
-                <div className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ABOUT</span>
-                </div>
-                <div className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">CONTACT</span>
                 </div>
               </div>
             </div>
@@ -229,9 +214,9 @@ export default function Elective3Page() {
               borderRadius: '50%',
             }}
           />
-          {/* Product Collection / Assignments Grid */}
+          {/* Assignments Grid */}
           <section className="py-8 md:py-[80px] px-4 sm:px-8 md:px-[80px] flex flex-col items-center gap-6 md:gap-[48px]">
-            {/* Responsive Grid - 2 columns on mobile, 4 on desktop */}
+            {/* First Row - 4 assignments */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[16px] w-full max-w-[1300px]">
               {assignments.slice(0, 4).map((assignment) => (
                 <div
@@ -239,51 +224,59 @@ export default function Elective3Page() {
                   onClick={() => setSelectedPdf(assignment)}
                   className="relative cursor-pointer group"
                 >
-                  <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
-                    {/* Thumbnail */}
-                    <div className="w-full aspect-square overflow-hidden">
-                      <img 
-                        src={assignment.image} 
-                        alt={assignment.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    {/* Title */}
-                    <CardContent className="p-2 md:p-4">
-                      <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] text-black text-center">
+                  <Card className="relative border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0 aspect-square">
+                    {/* Image */}
+                    <img 
+                      src={assignment.image} 
+                      alt={assignment.title}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    {/* Text Overlay */}
+                    <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 right-3 md:right-4 text-white z-10">
+                      <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">
                         {assignment.title}
                       </p>
-                    </CardContent>
+                      <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">
+                        {assignment.subtitle}
+                      </p>
+                    </div>
+                  </Card>
+                </div>
+              ))}
+            </div>
+            {/* Second Row - 1 centered assignment */}
+            <div className="flex justify-center w-full max-w-[1300px]">
+              {assignments.slice(4, 5).map((assignment) => (
+                <div
+                  key={assignment.id}
+                  onClick={() => setSelectedPdf(assignment)}
+                  className="relative cursor-pointer group"
+                >
+                  <Card className="relative border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0 aspect-square">
+                    {/* Image */}
+                    <img 
+                      src={assignment.image} 
+                      alt={assignment.title}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    {/* Text Overlay */}
+                    <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 right-3 md:right-4 text-white z-10">
+                      <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">
+                        {assignment.title}
+                      </p>
+                      <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">
+                        {assignment.subtitle}
+                      </p>
+                    </div>
                   </Card>
                 </div>
               ))}
             </div>
 
-            {/* Second Row - 1 Assignment Centered */}
-            <div className="flex gap-4 md:gap-[16px] items-center justify-center">
-              {assignments.slice(4, 5).map((assignment) => (
-                <a
-                  key={assignment.id}
-                  href={assignment.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative cursor-pointer group w-[calc(50%-8px)] md:w-[308px]"
-                >
-                  {/* Thumbnail */}
-                  <div className="w-full aspect-square rounded-[12px] md:rounded-[16px] overflow-hidden">
-                    <img 
-                      src={assignment.image} 
-                      alt={assignment.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  {/* Title */}
-                  <p className="mt-2 md:mt-4 font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] text-black text-center">
-                    {assignment.title}
-                  </p>
-                </a>
-              ))}
-            </div>
           </section>
         </main>
 
