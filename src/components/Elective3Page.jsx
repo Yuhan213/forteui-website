@@ -255,9 +255,8 @@ export default function Elective3Page() {
               ))}
             </div>
             {/* Second Row - 2 centered assignments */}
-            <div className="flex justify-center w-full max-w-[1300px]">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[16px] w-full md:w-1/2">
-                {assignments.slice(4, 6).map((assignment) => (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[16px] w-full max-w-[1300px]">
+              {assignments.slice(4, 6).map((assignment) => (
                   <div
                     key={assignment.id}
                     onClick={() => setSelectedPdf(assignment)}
@@ -284,7 +283,6 @@ export default function Elective3Page() {
                     </Card>
                   </div>
                 ))}
-              </div>
             </div>
 
           </section>
