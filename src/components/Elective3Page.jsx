@@ -89,6 +89,7 @@ export default function Elective3Page() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [selectedPdf, setSelectedPdf] = useState(null);
 
   useEffect(() => {
     // Detect touch device
@@ -229,11 +230,9 @@ export default function Elective3Page() {
             {/* Responsive Grid - 2 columns on mobile, 4 on desktop */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[16px] w-full max-w-[1300px]">
               {assignments.slice(0, 4).map((assignment) => (
-                <a
+                <div
                   key={assignment.id}
-                  href={assignment.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={() => setSelectedPdf(assignment)}
                   className="relative cursor-pointer group"
                 >
                   <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
@@ -252,7 +251,7 @@ export default function Elective3Page() {
                       </p>
                     </CardContent>
                   </Card>
-                </a>
+                </div>
               ))}
             </div>
 
@@ -308,6 +307,50 @@ export default function Elective3Page() {
           </div>
         </div>
         </footer>
+
+        {/* PDF Viewer Modal */}
+        {selectedPdf && (
+          <div 
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedPdf(null)}
+          >
+            <div 
+              className="bg-white rounded-lg w-full max-w-6xl h-[90vh] flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b">
+                <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] text-[#153935]">
+                  {selectedPdf.title}
+                </h3>
+                <div className="flex items-center gap-3">
+                  <Button
+                    onClick={() => window.open(selectedPdf.pdfUrl, '_blank')}
+                    className="bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] text-[14px] px-4 py-2 h-auto rounded-lg"
+                  >
+                    Download PDF
+                  </Button>
+                  <button
+                    onClick={() => setSelectedPdf(null)}
+                    className="text-[#8e8e93] hover:text-[#153935] transition-colors"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              {/* PDF Viewer */}
+              <div className="flex-1 overflow-hidden">
+                <iframe
+                  src={`${selectedPdf.pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
+                  className="w-full h-full border-0"
+                  title={selectedPdf.title}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <style>{`
