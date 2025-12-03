@@ -236,7 +236,9 @@ export default function HomePage() {
               {/* Large Card - Pacebeats */}
               <Card className="relative h-[280px] sm:h-[320px] md:h-full md:w-[60%] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300 p-0">
                 <img alt="Pacebeats" className="w-full h-full object-cover object-center" src={img} />
-                <div className="absolute bottom-4 md:bottom-[24px] left-4 md:left-[24px] text-white">
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 md:bottom-[24px] left-4 md:left-[24px] text-white z-10">
                   <p className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] md:text-[20px] leading-[1.2] mb-2">#1 Pacebeats</p>
                   <p className="font-['Plus_Jakarta_Sans'] font-normal text-[11px] md:text-[12px] leading-[1.5] max-w-[280px] md:max-w-[300px]">
                     Enhance your chosen item with an exceptional formula that offers unbeatable performance.
@@ -248,7 +250,9 @@ export default function HomePage() {
                 {/* Small Card - CampusCare */}
                 <Card className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0">
                   <img alt="CampusCare" className="w-full h-full object-cover" src={img3} />
-                  <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white z-10">
                     <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#2 CampusCare</p>
                     <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">We've got what you need.</p>
                   </div>
@@ -256,7 +260,9 @@ export default function HomePage() {
                 {/* Small Card - CafeHunt */}
                 <Card className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0">
                   <img alt="CafeHunt" className="w-full h-full object-cover" src={img4} />
-                  <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white z-10">
                     <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#3 CafeHunt</p>
                     <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">For your all time favorite</p>
                   </div>
