@@ -4,9 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Document, Page, pdfjs } from 'react-pdf';
 
-// Import assignment images
-import dockerLabImage from '/images/assignments/docker-lab.png?url';
-
 // Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -102,7 +99,7 @@ const assignments = [
     title: 'Assignment 6: Docker Lab',
     subtitle: 'Container orchestration',
     pdfUrl: 'https://docker-lab-elec3.vercel.app/',
-    image: dockerLabImage,
+    image: '/images/assignments/assignment6.png',
     type: 'website',
   },
 ];
