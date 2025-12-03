@@ -186,7 +186,9 @@ export default function HomePage() {
                   <img 
                     alt="Profile" 
                     className="w-full h-full object-cover" 
-                    src={imgProfilePhoto} 
+                    src={imgProfilePhoto}
+                    loading="eager"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -217,7 +219,7 @@ export default function HomePage() {
             <div className="w-full flex flex-col md:flex-row gap-4 md:gap-[16px] md:h-[420px]">
               {/* Large Card - Pacebeats */}
               <Card className="relative h-[280px] sm:h-[320px] md:h-full md:w-[60%] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300 p-0">
-                <img alt="Pacebeats" className="w-full h-full object-cover object-center" src={img} />
+                <img alt="Pacebeats" className="w-full h-full object-cover object-center" src={img} loading="lazy" decoding="async" />
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 md:bottom-[24px] left-4 md:left-[24px] text-white z-10">
@@ -231,7 +233,7 @@ export default function HomePage() {
               <div className="md:w-[40%] flex flex-col sm:flex-row md:flex-col gap-4 md:gap-[16px] md:h-full">
                 {/* Small Card - CampusCare */}
                 <Card className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0">
-                  <img alt="CampusCare" className="w-full h-full object-cover" src={img3} />
+                  <img alt="CampusCare" className="w-full h-full object-cover" src={img3} loading="lazy" decoding="async" />
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white z-10">
@@ -241,7 +243,7 @@ export default function HomePage() {
                 </Card>
                 {/* Small Card - CafeHunt */}
                 <Card className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0">
-                  <img alt="CafeHunt" className="w-full h-full object-cover" src={img4} />
+                  <img alt="CafeHunt" className="w-full h-full object-cover" src={img4} loading="lazy" decoding="async" />
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white z-10">
@@ -263,7 +265,7 @@ export default function HomePage() {
             <div className="w-full flex flex-col md:flex-row gap-6 md:gap-[40px]">
               {/* Testimonial 1 */}
               <div className="flex-1 flex gap-3 md:gap-[14px] items-start">
-                <img alt="Ken" className="w-[32px] h-[32px] md:w-[36px] md:h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} />
+                <img alt="Ken" className="w-[32px] h-[32px] md:w-[36px] md:h-[36px] rounded-full flex-shrink-0 object-cover" src={imgTestimonialThumb} loading="lazy" decoding="async" width="36" height="36" />
                 <div className="flex flex-col gap-2 md:gap-[14px] font-['Plus_Jakarta_Sans'] text-black">
                   <p className="text-[12px] md:text-[13px] leading-[1.7]">
                     Tim's ability to bridge the gap between technical development and user experience was invaluable to our PaceBeats project. He consistently delivered clean, functional code while ensuring our Android app remained intuitive for runners.

@@ -237,6 +237,8 @@ export default function Elective3Page() {
                     <img 
                       src={assignment.image} 
                       alt={assignment.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                     {/* Gradient Overlay */}
@@ -267,6 +269,8 @@ export default function Elective3Page() {
                       <img 
                         src={assignment.image} 
                         alt={assignment.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                       {/* Gradient Overlay */}

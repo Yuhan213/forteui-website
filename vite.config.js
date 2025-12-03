@@ -9,6 +9,22 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'pdf-vendor': ['react-pdf', 'pdfjs-dist'],
+        },
+      },
+    },
+  },
   server: {
     port: 5173,
     open: true
