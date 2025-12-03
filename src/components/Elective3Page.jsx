@@ -151,15 +151,12 @@ export default function Elective3Page() {
               </Link>
               <div className="flex items-center gap-1 cursor-pointer group">
                 <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">UI/UX PROJECTS</span>
-                <ChevronDown />
               </div>
               <div className="flex gap-[4px] items-center cursor-pointer group">
                 <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-black group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 3</span>
-                <ChevronDown color="#000" />
               </div>
               <div className="flex gap-[4px] items-center cursor-pointer group">
                 <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 5</span>
-                <ChevronDown />
               </div>
               <div className="flex gap-[4px] items-center cursor-pointer group">
                 <span className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ABOUT</span>
@@ -185,25 +182,22 @@ export default function Elective3Page() {
             <div className="h-[48px] flex items-center justify-center">
               <div className="flex gap-[20px] items-center">
                 <Link to="/" className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">HOME</span>
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">HOME</span>
                 </Link>
                 <div className="flex items-center gap-1 cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">UI/UX PROJECTS</span>
-                  <ChevronDown />
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">UI/UX PROJECTS</span>
                 </div>
                 <div className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">ELECTIVE 3</span>
-                  <ChevronDown color="#000" />
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-black group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 3</span>
                 </div>
                 <div className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">ELECTIVE 5</span>
-                  <ChevronDown />
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ELECTIVE 5</span>
                 </div>
                 <div className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">ABOUT</span>
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">ABOUT</span>
                 </div>
                 <div className="flex gap-[4px] items-center cursor-pointer group">
-                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-all duration-300 group-hover:scale-110">CONTACT</span>
+                  <span className="font-['Plus_Jakarta_Sans'] font-bold text-[13px] text-[#8e8e93] group-hover:text-[#4ade80] transition-colors duration-300">CONTACT</span>
                 </div>
               </div>
             </div>
