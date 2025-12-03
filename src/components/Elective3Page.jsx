@@ -256,11 +256,11 @@ export default function Elective3Page() {
             </div>
             {/* Second Row - 2 centered assignments */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[16px] w-full max-w-[1300px]">
-              {assignments.slice(4, 6).map((assignment) => (
+              {assignments.slice(4, 6).map((assignment, index) => (
                   <div
                     key={assignment.id}
                     onClick={() => setSelectedPdf(assignment)}
-                    className="relative cursor-pointer group"
+                    className={`relative cursor-pointer group ${index === 0 ? 'md:col-start-2' : ''}`}
                   >
                     <Card className="relative border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0 aspect-square">
                       {/* Image */}
