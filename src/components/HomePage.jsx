@@ -329,7 +329,7 @@ export default function HomePage() {
                 <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><LinkedInIcon /></a>
               </div>
               <div className="flex flex-wrap gap-3 md:gap-[16px] font-['Plus_Jakarta_Sans'] text-[10px] md:text-[11px] text-[#f2f2f7]">
-                <span>ForteUI© 2023</span>
+                <span>ForteUI© 2025</span>
                 <a href="#" className="hover:underline">Terms</a>
                 <a href="#" className="hover:underline">Privacy & Policy</a>
                 <a href="#" className="hover:underline">Cookie Policy</a>

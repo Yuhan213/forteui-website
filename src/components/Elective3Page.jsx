@@ -57,18 +57,18 @@ const assignmentImages = [
   'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
 ];
 
-// Sample PDF assignments - replace with your actual PDFs
+// PDF assignments with actual files
 const assignments = [
   {
     id: 1,
     title: 'Assignment 1',
-    pdfUrl: '/pdfs/assignment1.pdf',
+    pdfUrl: '/pdfs/Assignment 1.pdf',
     image: assignmentImages[0],
   },
   {
     id: 2,
     title: 'Assignment 2',
-    pdfUrl: '/pdfs/assignment2.pdf',
+    pdfUrl: '/pdfs/Assignment 2.pdf',
     image: assignmentImages[1],
   },
   {
@@ -82,12 +82,6 @@ const assignments = [
     title: 'Assignment 4',
     pdfUrl: '/pdfs/assignment4.pdf',
     image: assignmentImages[3],
-  },
-  {
-    id: 5,
-    title: 'Assignment 5',
-    pdfUrl: '/pdfs/assignment5.pdf',
-    image: assignmentImages[4],
   },
 ];
 
