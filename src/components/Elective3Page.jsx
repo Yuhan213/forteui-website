@@ -318,10 +318,7 @@ export default function Elective3Page() {
         {selectedPdf && (
           <div 
             className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-            onClick={() => {
-              setSelectedPdf(null);
-              setPageNumber(1);
-            }}
+            onClick={() => setSelectedPdf(null)}
           >
             <div 
               className="bg-white rounded-lg w-full max-w-6xl h-[90vh] flex flex-col"
@@ -329,32 +326,9 @@ export default function Elective3Page() {
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between p-4 border-b">
-                <div className="flex items-center gap-4">
-                  <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] text-[#153935]">
-                    {selectedPdf.title}
-                  </h3>
-                  {numPages && (
-                    <div className="flex items-center gap-2">
-                      <Button
-                        onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
-                        disabled={pageNumber === 1}
-                        className="bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] text-[14px] px-3 py-1 h-auto rounded-lg disabled:opacity-50"
-                      >
-                        ←
-                      </Button>
-                      <span className="font-['Plus_Jakarta_Sans'] text-[14px] text-[#8e8e93]">
-                        {pageNumber} / {numPages}
-                      </span>
-                      <Button
-                        onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
-                        disabled={pageNumber === numPages}
-                        className="bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] text-[14px] px-3 py-1 h-auto rounded-lg disabled:opacity-50"
-                      >
-                        →
-                      </Button>
-                    </div>
-                  )}
-                </div>
+                <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] text-[#153935]">
+                  {selectedPdf.title}
+                </h3>
                 <div className="flex items-center gap-3">
                   <Button
                     onClick={() => window.open(selectedPdf.pdfUrl, '_blank')}
@@ -363,10 +337,7 @@ export default function Elective3Page() {
                     Download PDF
                   </Button>
                   <button
-                    onClick={() => {
-                      setSelectedPdf(null);
-                      setPageNumber(1);
-                    }}
+                    onClick={() => setSelectedPdf(null)}
                     className="text-[#8e8e93] hover:text-[#153935] transition-colors"
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -375,8 +346,8 @@ export default function Elective3Page() {
                   </button>
                 </div>
               </div>
-              {/* PDF Viewer */}
-              <div className="flex-1 overflow-auto bg-gray-100 flex items-center justify-center">
+              {/* PDF Viewer - Scrollable with all pages */}
+              <div className="flex-1 overflow-auto bg-gray-100 p-4">
                 <Document
                   file={selectedPdf.pdfUrl}
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
@@ -390,14 +361,18 @@ export default function Elective3Page() {
                       <div className="font-['Plus_Jakarta_Sans'] text-[16px] text-red-600">Failed to load PDF</div>
                     </div>
                   }
+                  className="flex flex-col items-center gap-4"
                 >
-                  <Page
-                    pageNumber={pageNumber}
-                    renderTextLayer={false}
-                    renderAnnotationLayer={false}
-                    className="shadow-lg"
-                    width={Math.min(window.innerWidth * 0.9, 1000)}
-                  />
+                  {numPages && Array.from(new Array(numPages), (el, index) => (
+                    <Page
+                      key={`page_${index + 1}`}
+                      pageNumber={index + 1}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      className="shadow-lg"
+                      width={Math.min(window.innerWidth - 100, 900)}
+                    />
+                  ))}
                 </Document>
               </div>
             </div>
