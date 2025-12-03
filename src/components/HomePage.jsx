@@ -89,7 +89,7 @@ export default function HomePage() {
             left: cursorPos.x,
             top: cursorPos.y,
             transform: 'translate(-50%, -50%) translateZ(0)',
-            background: 'radial-gradient(circle, #153935 0%, rgba(21,57,53,0.6) 50%, transparent 70%)',
+            background: 'radial-gradient(circle, #3b82f6 0%, rgba(59,130,246,0.6) 50%, transparent 70%)',
           }}
         />
       )}
@@ -115,7 +115,7 @@ export default function HomePage() {
       />
 
       {/* Header */}
-      <header className="fixed h-[60px] md:h-[100px] left-0 right-0 top-0 bg-white/90 backdrop-blur-md z-50" style={{ boxShadow: '0px 0px 1px 0px rgba(20,20,20,0.12), 0px 1px 8px 0px rgba(20,20,20,0.08)' }}>
+      <header className="fixed h-[60px] md:h-[100px] left-0 right-0 top-0 bg-white/70 backdrop-blur-xl z-50" style={{ boxShadow: '0px 0px 1px 0px rgba(20,20,20,0.12), 0px 1px 8px 0px rgba(20,20,20,0.08)' }}>
         {/* Mobile Header */}
         <div className="md:hidden h-[60px] flex items-center justify-between px-4">
           <div className="font-['Montserrat'] font-semibold text-[20px] text-[#153935] tracking-[-0.7px]">
