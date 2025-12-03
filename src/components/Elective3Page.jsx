@@ -99,7 +99,7 @@ const assignments = [
     title: 'Assignment 6: Docker Lab',
     subtitle: 'Container orchestration',
     pdfUrl: 'https://docker-lab-elec3.vercel.app/',
-    image: `/images/assignments/assignment6.png?t=${Date.now()}`,
+    image: '/images/assignments/docker-lab.png',
     type: 'website',
   },
 ];
