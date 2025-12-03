@@ -153,7 +153,12 @@ export default function Elective3Page() {
             <Link to="/" className="font-['Montserrat'] font-semibold text-[20px] text-[#153935] tracking-[-0.7px]">
               ForteUI
             </Link>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="p-2"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
+            >
               {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
@@ -237,7 +242,8 @@ export default function Elective3Page() {
                     <img 
                       src={assignment.image} 
                       alt={assignment.title}
-                      loading="lazy"
+                      loading={assignment.id <= 2 ? "eager" : "lazy"}
+                      fetchpriority={assignment.id <= 2 ? "high" : "low"}
                       decoding="async"
                       className="w-full h-full object-cover"
                     />
@@ -303,9 +309,9 @@ export default function Elective3Page() {
           </p>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="flex gap-2 md:gap-[8px]">
-              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><TwitterIcon /></a>
-              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><DribbbleIcon /></a>
-              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><LinkedInIcon /></a>
+              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity" aria-label="Follow us on Twitter"><TwitterIcon /></a>
+              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity" aria-label="View our Dribbble portfolio"><DribbbleIcon /></a>
+              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity" aria-label="Connect on LinkedIn"><LinkedInIcon /></a>
             </div>
             <div className="flex flex-wrap gap-3 md:gap-[16px] font-['Plus_Jakarta_Sans'] text-[10px] md:text-[11px] text-[#f2f2f7]">
               <span>ForteUI© 2023</span>

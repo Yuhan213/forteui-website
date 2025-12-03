@@ -121,7 +121,12 @@ export default function HomePage() {
           <div className="font-['Montserrat'] font-semibold text-[20px] text-[#153935] tracking-[-0.7px]">
             ForteUI
           </div>
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+            className="p-2"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+          >
             {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
@@ -188,6 +193,7 @@ export default function HomePage() {
                     className="w-full h-full object-cover" 
                     src={imgProfilePhoto}
                     loading="eager"
+                    fetchpriority="high"
                     decoding="async"
                   />
                 </div>
@@ -203,6 +209,7 @@ export default function HomePage() {
               </p>
               <Button 
                 className="self-center md:self-start bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] font-medium text-[14px] sm:text-[16px] px-8 sm:px-[40px] h-auto py-3 sm:py-[16px] rounded-[40px] hover:scale-105 transition-all duration-300"
+                aria-label="Contact me to discuss your project"
               >
                 Contact Me
               </Button>
@@ -307,11 +314,11 @@ export default function HomePage() {
               Supercharge your design workflow, kick-start your project faster and level up your process.
             </p>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="flex gap-2 md:gap-[8px]">
-                <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><TwitterIcon /></a>
-                <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><DribbbleIcon /></a>
-                <a href="#" className="opacity-80 hover:opacity-100 transition-opacity"><LinkedInIcon /></a>
-              </div>
+            <div className="flex gap-2 md:gap-[8px]">
+              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity" aria-label="Follow us on Twitter"><TwitterIcon /></a>
+              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity" aria-label="View our Dribbble portfolio"><DribbbleIcon /></a>
+              <a href="#" className="opacity-80 hover:opacity-100 transition-opacity" aria-label="Connect on LinkedIn"><LinkedInIcon /></a>
+            </div>
               <div className="flex flex-wrap gap-3 md:gap-[16px] font-['Plus_Jakarta_Sans'] text-[10px] md:text-[11px] text-[#f2f2f7]">
                 <span>ForteUI© 2025</span>
                 <a href="#" className="hover:underline">Terms</a>

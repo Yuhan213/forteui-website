@@ -11,9 +11,12 @@ export default defineConfig({
   },
   build: {
     minify: 'terser',
+    cssMinify: true,
     terserOptions: {
       compress: {
         drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info'],
       },
     },
     rollupOptions: {
@@ -24,6 +27,7 @@ export default defineConfig({
         },
       },
     },
+    chunkSizeWarningLimit: 1000,
   },
   server: {
     port: 5173,
