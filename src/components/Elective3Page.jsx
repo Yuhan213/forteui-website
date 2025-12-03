@@ -84,7 +84,7 @@ const assignments = [
   {
     id: 4,
     title: 'Assignment 4',
-    pdfUrl: '/pdfs/assignment4.pdf',
+    pdfUrl: '/pdfs/Assignment 4.pdf',
     image: assignmentImages[3],
   },
 ];
