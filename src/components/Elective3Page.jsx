@@ -61,31 +61,35 @@ const assignmentImages = [
   'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
 ];
 
-// PDF assignments with actual files
+// Assignments with PDFs and websites
 const assignments = [
   {
     id: 1,
     title: 'Assignment 1',
     pdfUrl: '/pdfs/Assignment 1.pdf',
     image: assignmentImages[0],
+    type: 'pdf',
   },
   {
     id: 2,
     title: 'Assignment 2',
     pdfUrl: '/pdfs/Assignment 2.pdf',
     image: assignmentImages[1],
+    type: 'pdf',
   },
   {
     id: 3,
     title: 'Assignment 3',
-    pdfUrl: '/pdfs/assignment3.pdf',
+    pdfUrl: 'https://docker-lab-elec3.vercel.app/',
     image: assignmentImages[2],
+    type: 'website',
   },
   {
     id: 4,
     title: 'Assignment 4',
     pdfUrl: '/pdfs/Assignment 4.pdf',
     image: assignmentImages[3],
+    type: 'pdf',
   },
 ];
 
@@ -308,7 +312,7 @@ export default function Elective3Page() {
         </div>
         </footer>
 
-        {/* PDF Viewer Modal */}
+        {/* Content Viewer Modal - PDF or Website */}
         {selectedPdf && (
           <div 
             className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
@@ -328,7 +332,7 @@ export default function Elective3Page() {
                     onClick={() => window.open(selectedPdf.pdfUrl, '_blank')}
                     className="bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] text-[14px] px-4 py-2 h-auto rounded-lg"
                   >
-                    Download PDF
+                    {selectedPdf.type === 'website' ? 'Open Website' : 'Download PDF'}
                   </Button>
                   <button
                     onClick={() => setSelectedPdf(null)}
@@ -340,34 +344,42 @@ export default function Elective3Page() {
                   </button>
                 </div>
               </div>
-              {/* PDF Viewer - Scrollable with all pages */}
+              {/* Content Viewer */}
               <div className="flex-1 overflow-auto bg-gray-100 p-4">
-                <Document
-                  file={selectedPdf.pdfUrl}
-                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                  loading={
-                    <div className="flex items-center justify-center p-8">
-                      <div className="font-['Plus_Jakarta_Sans'] text-[16px] text-[#8e8e93]">Loading PDF...</div>
-                    </div>
-                  }
-                  error={
-                    <div className="flex items-center justify-center p-8">
-                      <div className="font-['Plus_Jakarta_Sans'] text-[16px] text-red-600">Failed to load PDF</div>
-                    </div>
-                  }
-                  className="flex flex-col items-center gap-4"
-                >
-                  {numPages && Array.from(new Array(numPages), (el, index) => (
-                    <Page
-                      key={`page_${index + 1}`}
-                      pageNumber={index + 1}
-                      renderTextLayer={false}
-                      renderAnnotationLayer={false}
-                      className="shadow-lg"
-                      width={Math.min(window.innerWidth - 100, 900)}
-                    />
-                  ))}
-                </Document>
+                {selectedPdf.type === 'website' ? (
+                  <iframe
+                    src={selectedPdf.pdfUrl}
+                    className="w-full h-full border-0 rounded-lg shadow-lg bg-white"
+                    title={selectedPdf.title}
+                  />
+                ) : (
+                  <Document
+                    file={selectedPdf.pdfUrl}
+                    onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                    loading={
+                      <div className="flex items-center justify-center p-8">
+                        <div className="font-['Plus_Jakarta_Sans'] text-[16px] text-[#8e8e93]">Loading PDF...</div>
+                      </div>
+                    }
+                    error={
+                      <div className="flex items-center justify-center p-8">
+                        <div className="font-['Plus_Jakarta_Sans'] text-[16px] text-red-600">Failed to load PDF</div>
+                      </div>
+                    }
+                    className="flex flex-col items-center gap-4"
+                  >
+                    {numPages && Array.from(new Array(numPages), (el, index) => (
+                      <Page
+                        key={`page_${index + 1}`}
+                        pageNumber={index + 1}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                        className="shadow-lg"
+                        width={Math.min(window.innerWidth - 100, 900)}
+                      />
+                    ))}
+                  </Document>
+                )}
               </div>
             </div>
           </div>
