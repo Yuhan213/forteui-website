@@ -252,7 +252,7 @@ export default function Elective3Page() {
                 <div
                   key={assignment.id}
                   onClick={() => setSelectedPdf(assignment)}
-                  className="relative cursor-pointer group"
+                  className="relative cursor-pointer group w-1/2 md:w-1/4"
                 >
                   <Card className="relative border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0 aspect-square">
                     {/* Image */}
