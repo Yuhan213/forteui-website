@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 // Mobile Menu Icon
 const MenuIcon = () => (
@@ -240,18 +242,22 @@ export default function Elective3Page() {
                   rel="noopener noreferrer"
                   className="relative cursor-pointer group"
                 >
-                  {/* Thumbnail */}
-                  <div className="w-full aspect-square rounded-[12px] md:rounded-[16px] overflow-hidden">
-                    <img 
-                      src={assignment.image} 
-                      alt={assignment.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  {/* Title */}
-                  <p className="mt-2 md:mt-4 font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] text-black text-center">
-                    {assignment.title}
-                  </p>
+                  <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+                    {/* Thumbnail */}
+                    <div className="w-full aspect-square overflow-hidden">
+                      <img 
+                        src={assignment.image} 
+                        alt={assignment.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    {/* Title */}
+                    <CardContent className="p-2 md:p-4">
+                      <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] text-black text-center">
+                        {assignment.title}
+                      </p>
+                    </CardContent>
+                  </Card>
                 </a>
               ))}
             </div>

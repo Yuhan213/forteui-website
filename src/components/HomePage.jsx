@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 // Image assets - place your images in public/images folder
 // Using placeholders for missing images - replace with your own later
@@ -221,9 +223,11 @@ export default function HomePage() {
               <p className="font-['Plus_Jakarta_Sans'] font-medium text-[13px] sm:text-[14px] text-black leading-[22px] sm:leading-[24px]">
                 UI/UX Designer and Developer creating intuitive digital experiences. I blend user research, creative design, and technical expertise to build solutions that users love.
               </p>
-              <button className="self-center md:self-start bg-[#153935] text-white font-['Plus_Jakarta_Sans'] font-medium text-[14px] sm:text-[16px] px-8 sm:px-[40px] py-3 sm:py-[16px] rounded-[40px] hover:bg-[#1a4a44] hover:scale-105 transition-all duration-300">
+              <Button 
+                className="self-center md:self-start bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] font-medium text-[14px] sm:text-[16px] px-8 sm:px-[40px] h-auto py-3 sm:py-[16px] rounded-[40px] hover:scale-105 transition-all duration-300"
+              >
                 Contact Me
-              </button>
+              </Button>
             </div>
           </div>
         </section>
@@ -236,7 +240,7 @@ export default function HomePage() {
             </h2>
             <div className="w-full flex flex-col md:flex-row gap-4 md:gap-[16px] md:h-[420px]">
               {/* Large Card - Pacebeats */}
-              <div className="relative h-[280px] sm:h-[320px] md:h-full md:w-[60%] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300">
+              <Card className="relative h-[280px] sm:h-[320px] md:h-full md:w-[60%] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.01] transition-transform duration-300 p-0">
                 <img alt="Pacebeats" className="w-full h-full object-cover object-center" src={img} />
                 <div className="absolute bottom-4 md:bottom-[24px] left-4 md:left-[24px] text-white">
                   <p className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] md:text-[20px] leading-[1.2] mb-2">#1 Pacebeats</p>
@@ -244,25 +248,25 @@ export default function HomePage() {
                     Enhance your chosen item with an exceptional formula that offers unbeatable performance.
                   </p>
                 </div>
-              </div>
+              </Card>
               {/* Right Column - Two stacked cards */}
               <div className="md:w-[40%] flex flex-col sm:flex-row md:flex-col gap-4 md:gap-[16px] md:h-full">
                 {/* Small Card - CampusCare */}
-                <div className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+                <Card className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0">
                   <img alt="CampusCare" className="w-full h-full object-cover" src={img3} />
                   <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
                     <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#2 CampusCare</p>
                     <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">We've got what you need.</p>
                   </div>
-                </div>
+                </Card>
                 {/* Small Card - CafeHunt */}
-                <div className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+                <Card className="relative h-[180px] sm:h-[200px] md:h-[calc(50%-8px)] border-0 rounded-[16px] overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 p-0">
                   <img alt="CafeHunt" className="w-full h-full object-cover" src={img4} />
                   <div className="absolute bottom-4 md:bottom-[20px] left-4 md:left-[20px] text-white">
                     <p className="font-['Plus_Jakarta_Sans'] font-bold text-[14px] md:text-[16px] leading-[1.2] mb-1">#3 CafeHunt</p>
                     <p className="font-['Plus_Jakarta_Sans'] font-normal text-[10px] md:text-[11px] leading-[1.5]">For your all time favorite</p>
                   </div>
-                </div>
+                </Card>
               </div>
             </div>
           </div>
