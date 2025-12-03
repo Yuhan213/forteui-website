@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+
+// Configure PDF.js worker
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 // Mobile Menu Icon
 const MenuIcon = () => (
@@ -90,6 +96,8 @@ export default function Elective3Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     // Detect touch device
@@ -312,7 +320,10 @@ export default function Elective3Page() {
         {selectedPdf && (
           <div 
             className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedPdf(null)}
+            onClick={() => {
+              setSelectedPdf(null);
+              setPageNumber(1);
+            }}
           >
             <div 
               className="bg-white rounded-lg w-full max-w-6xl h-[90vh] flex flex-col"
@@ -320,9 +331,32 @@ export default function Elective3Page() {
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between p-4 border-b">
-                <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] text-[#153935]">
-                  {selectedPdf.title}
-                </h3>
+                <div className="flex items-center gap-4">
+                  <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-[18px] text-[#153935]">
+                    {selectedPdf.title}
+                  </h3>
+                  {numPages && (
+                    <div className="flex items-center gap-2">
+                      <Button
+                        onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
+                        disabled={pageNumber === 1}
+                        className="bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] text-[14px] px-3 py-1 h-auto rounded-lg disabled:opacity-50"
+                      >
+                        ←
+                      </Button>
+                      <span className="font-['Plus_Jakarta_Sans'] text-[14px] text-[#8e8e93]">
+                        {pageNumber} / {numPages}
+                      </span>
+                      <Button
+                        onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
+                        disabled={pageNumber === numPages}
+                        className="bg-[#153935] hover:bg-[#1a4a44] text-white font-['Plus_Jakarta_Sans'] text-[14px] px-3 py-1 h-auto rounded-lg disabled:opacity-50"
+                      >
+                        →
+                      </Button>
+                    </div>
+                  )}
+                </div>
                 <div className="flex items-center gap-3">
                   <Button
                     onClick={() => window.open(selectedPdf.pdfUrl, '_blank')}
@@ -331,7 +365,10 @@ export default function Elective3Page() {
                     Download PDF
                   </Button>
                   <button
-                    onClick={() => setSelectedPdf(null)}
+                    onClick={() => {
+                      setSelectedPdf(null);
+                      setPageNumber(1);
+                    }}
                     className="text-[#8e8e93] hover:text-[#153935] transition-colors"
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -341,12 +378,29 @@ export default function Elective3Page() {
                 </div>
               </div>
               {/* PDF Viewer */}
-              <div className="flex-1 overflow-hidden">
-                <iframe
-                  src={`${selectedPdf.pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
-                  className="w-full h-full border-0"
-                  title={selectedPdf.title}
-                />
+              <div className="flex-1 overflow-auto bg-gray-100 flex items-center justify-center">
+                <Document
+                  file={selectedPdf.pdfUrl}
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  loading={
+                    <div className="flex items-center justify-center p-8">
+                      <div className="font-['Plus_Jakarta_Sans'] text-[16px] text-[#8e8e93]">Loading PDF...</div>
+                    </div>
+                  }
+                  error={
+                    <div className="flex items-center justify-center p-8">
+                      <div className="font-['Plus_Jakarta_Sans'] text-[16px] text-red-600">Failed to load PDF</div>
+                    </div>
+                  }
+                >
+                  <Page
+                    pageNumber={pageNumber}
+                    renderTextLayer={true}
+                    renderAnnotationLayer={true}
+                    className="shadow-lg"
+                    width={Math.min(window.innerWidth * 0.9, 1000)}
+                  />
+                </Document>
               </div>
             </div>
           </div>
